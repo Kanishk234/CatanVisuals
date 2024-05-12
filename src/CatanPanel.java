@@ -8,47 +8,55 @@ public class CatanPanel extends JPanel implements Runnable{
     public static final int HEIGHT = 720;
     final int FPS = 60;
     Thread gameThread;
-    private LinkedList<TileImage> imgs;
+    private LinkedList<TileImage> tileImages;
+    private LinkedList<HouseImage> houseImages;
 
     public CatanPanel() {
         //Panel Settings
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setBackground(Color.black);
         this.setLayout(null);
-        this.imgs = new LinkedList<>();
+        this.tileImages = new LinkedList<>();
+        this.houseImages = new LinkedList<>();
         setupImages();
+        addHouses();
     }
 
     public void setupImages() {
         // hardcode all tile imgs and num imgs and add to list
         //first row - 3
-        imgs.add(new TileImage("brick", 9, 200, 100));
-        imgs.add(new TileImage("ore", 5, 200 + (int)(TileImage.scale * 170), 100));
-        imgs.add(new TileImage("wood", 5, 200 + (int)(2 * TileImage.scale * 170), 100));
+        tileImages.add(new TileImage("brick", 9, 200, 100));
+        tileImages.add(new TileImage("ore", 5, 200 + (int)(TileImage.scale * 170), 100));
+        tileImages.add(new TileImage("wood", 5, 200 + (int)(2 * TileImage.scale * 170), 100));
 
         //second row - 4
-        imgs.add(new TileImage("sheep", 3, 200 - (int)(0.5 * TileImage.scale * 170), 100 + (int)(TileImage.scale * 152)));
-        imgs.add(new TileImage("wheat", 3, 200 + (int)(0.5 * TileImage.scale * 174), 100 + (int)(TileImage.scale * 152)));
-        imgs.add(new TileImage("brick", 12, 200 + (int)(3 * 0.5 * TileImage.scale * 170), 100 + (int)(TileImage.scale * 152)));
-        imgs.add(new TileImage("wood", 8, 200 + (int)(5 * 0.5 * TileImage.scale * 170), 100 + (int)(TileImage.scale * 152)));
+        tileImages.add(new TileImage("sheep", 3, 200 - (int)(0.5 * TileImage.scale * 170), 100 + (int)(TileImage.scale * 152)));
+        tileImages.add(new TileImage("wheat", 3, 200 + (int)(0.5 * TileImage.scale * 174), 100 + (int)(TileImage.scale * 152)));
+        tileImages.add(new TileImage("brick", 12, 200 + (int)(3 * 0.5 * TileImage.scale * 170), 100 + (int)(TileImage.scale * 152)));
+        tileImages.add(new TileImage("wood", 8, 200 + (int)(5 * 0.5 * TileImage.scale * 170), 100 + (int)(TileImage.scale * 152)));
 
         //third row - 5
-        imgs.add(new TileImage("wheat", 6, 200 - (int)(2 * 0.5 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wheat", 6, 200, 100 + (int)(2 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wood", 2, 200 + (int)(2 * 0.5 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wood", 2, 200 + (int)(2 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wood", 2, 200 + (int)(2 * 1.5 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wheat", 6, 200 - (int)(2 * 0.5 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wheat", 6, 200, 100 + (int)(2 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wood", 2, 200 + (int)(2 * 0.5 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wood", 2, 200 + (int)(2 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wood", 2, 200 + (int)(2 * 1.5 * TileImage.scale * 170), 100 + (int)(2 * TileImage.scale * 152)));
 
         //fourth row - 4
-        imgs.add(new TileImage("sheep", 3, 200 - (int)(0.5 * TileImage.scale * 170), 100 + (int)(3 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wheat", 3, 200 + (int)(0.5 * TileImage.scale * 174), 100 + (int)(3 * TileImage.scale * 152)));
-        imgs.add(new TileImage("brick", 12, 200 + (int)(3 * 0.5 * TileImage.scale * 170), 100 + (int)(3 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wood", 8, 200 + (int)(5 * 0.5 * TileImage.scale * 170), 100 + (int)(3 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("sheep", 3, 200 - (int)(0.5 * TileImage.scale * 170), 100 + (int)(3 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wheat", 3, 200 + (int)(0.5 * TileImage.scale * 174), 100 + (int)(3 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("brick", 12, 200 + (int)(3 * 0.5 * TileImage.scale * 170), 100 + (int)(3 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wood", 8, 200 + (int)(5 * 0.5 * TileImage.scale * 170), 100 + (int)(3 * TileImage.scale * 152)));
 
         //fifth row - 3
-        imgs.add(new TileImage("brick", 9, 200, 100 + (int)(4 * TileImage.scale * 152)));
-        imgs.add(new TileImage("ore", 5, 200 + (int)(TileImage.scale * 170), 100 + (int)(4 * TileImage.scale * 152)));
-        imgs.add(new TileImage("wood", 5, 200 + (int)(2 * TileImage.scale * 170), 100 + (int)(4 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("brick", 9, 200, 100 + (int)(4 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("ore", 5, 200 + (int)(TileImage.scale * 170), 100 + (int)(4 * TileImage.scale * 152)));
+        tileImages.add(new TileImage("wood", 5, 200 + (int)(2 * TileImage.scale * 170), 100 + (int)(4 * TileImage.scale * 152)));
+    }
+
+    public void addHouses() {
+        houseImages.add(new HouseImage("orange", 195, 120));
+
     }
 
     public void launchGame() {
@@ -83,11 +91,18 @@ public class CatanPanel extends JPanel implements Runnable{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        //this.pm.draw(g2);
+
         g2.setColor(Color.GRAY);
         g2.fillRect(0, 0, WIDTH, HEIGHT);
-        for (TileImage ci : imgs) {
-            ci.draw(g2);
+
+        for (TileImage ti : tileImages) {
+            ti.draw(g2);
         }
+
+        for (HouseImage hi : houseImages) {
+            hi.draw(g2);
+        }
+
+
     }
 }

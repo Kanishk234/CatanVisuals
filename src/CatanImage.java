@@ -30,5 +30,9 @@ public class CatanImage {
         g2.drawImage(image, x, y, width, length, null);
     }
 
+    public boolean equals(CatanImage other) {
+        return (this.x == other.x && this.y == other.y);
+    }
+
 
 }
