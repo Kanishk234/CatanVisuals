@@ -10,6 +10,7 @@ public class CatanPanel extends JPanel implements Runnable{
     Thread gameThread;
     private LinkedList<TileImage> tileImages;
     private LinkedList<HouseImage> houseImages;
+    private LinkedList<RoadImage> roadImages;
 
     public CatanPanel() {
         //Panel Settings
@@ -18,8 +19,10 @@ public class CatanPanel extends JPanel implements Runnable{
         this.setLayout(null);
         this.tileImages = new LinkedList<>();
         this.houseImages = new LinkedList<>();
+        this.roadImages = new LinkedList<>();
         setupImages();
         addHouses();
+        addRoads();
     }
 
     public void setupImages() {
@@ -56,7 +59,10 @@ public class CatanPanel extends JPanel implements Runnable{
 
     public void addHouses() {
         houseImages.add(new HouseImage("orange", 195, 120));
+    }
 
+    public void addRoads() {
+        roadImages.add(new RoadImage("red", 199, 135));
     }
 
     public void launchGame() {
@@ -103,6 +109,9 @@ public class CatanPanel extends JPanel implements Runnable{
             hi.draw(g2);
         }
 
+        for (RoadImage ri : roadImages) {
+            ri.draw(g2);
+        }
 
     }
 }
