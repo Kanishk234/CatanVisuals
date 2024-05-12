@@ -12,18 +12,6 @@ public class TileImage {
         numberToken = new CatanImage("/catanImages/" + token + ".png", x+ (int)(63 * scale), y+ (int)(76*scale), (int)(49 * scale), (int)(49 * scale));
     }
 
-//    public String resourceToImage(String resource) {
-//        return switch (resource) {
-//            case "brick" -> "brick.png";
-//            case "ore" -> "ore.png";
-//            case "sheep" -> "sheep.png";
-//            case "wheat" -> "wheat.png";
-//            case "wood" -> "wood.png";
-//            case "desert" -> "desert.png";
-//            default -> "";
-//        };
-//    }
-
     public void draw(Graphics2D g2) {
         resourceImage.draw(g2);
         numberToken.draw(g2);
