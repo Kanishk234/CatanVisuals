@@ -11,6 +11,7 @@ public class CatanPanel extends JPanel implements Runnable{
     private LinkedList<TileImage> tileImages;
     private LinkedList<HouseImage> houseImages;
     private LinkedList<RoadImage> roadImages;
+    private CatanImage robber;
 
     public CatanPanel() {
         //Panel Settings
@@ -23,6 +24,7 @@ public class CatanPanel extends JPanel implements Runnable{
         setupImages();
         addHouses();
         addRoads();
+        this.robber = new CatanImage("/catanImages/robber.png", 100, 200, 15, 15);
     }
 
     public void setupImages() {
@@ -65,6 +67,11 @@ public class CatanPanel extends JPanel implements Runnable{
         roadImages.add(new RoadImage("red", 199, 135));
     }
 
+    public void addRoad(RoadImage r) {
+        roadImages.add(r);
+    }
+
+
     public void launchGame() {
         this.gameThread = new Thread(this);
         this.gameThread.start();
@@ -94,6 +101,11 @@ public class CatanPanel extends JPanel implements Runnable{
 
     }
 
+    private void updateRobber(int x, int y) {
+        robber.setX(x);
+        robber.setY(y);
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -112,6 +124,7 @@ public class CatanPanel extends JPanel implements Runnable{
         for (RoadImage ri : roadImages) {
             ri.draw(g2);
         }
+        robber.draw(g2);
 
     }
 }
